@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Реєстрація</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content-container {
+            display: none;
+        }
+
+        .columns {
+            display: flex;
+            justify-content: center;
+        }
+
+        .column {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .column h1 {
+            color: black;
+        }
+
+        .edit-buttons {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Реєстрація</h2>
+            <form>
+                <input type="text" id="codeInput" placeholder="Код">
+                <input type="text" id="confirmationInput" placeholder="Підтвердження коду">
+                <button id="submitButton">Відправити</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container content-container" id="content">
+        <div class="columns">
+            <div class="column" id="column1">
+                <h1 id="h1Column1">1</h1>
+                <input type="text" id="inputColumn1" placeholder="Нове значення">
+                <button id="saveButtonColumn1">Зберегти</button>
+            </div>
+            <div class="column" id="column2">
+                <h1 id="h1Column2">5</h1>
+                <input type="text" id="inputColumn2" placeholder="Нове значення">
+                <button id="saveButtonColumn2">Зберегти</button>
+            </div>
+            <div class="column" id="column3">
+                <h1 id="h1Column3">10</h1>
+                <input type="text" id="inputColumn3" placeholder="Нове значення">
+                <button id="saveButtonColumn3">Зберегти</button>
+            </div>
+        </div>
+        
+        <div class="edit-buttons">
+            <input type="text" id="newNumber" placeholder="Нове значення">
+            <button id="saveAllChangesButton">Зберегти</button>
+            <button id="saveAllButton" style="display: none;">Зберегти зміни на цій сторінці</button>
+        </div>
+    </div>
+
+    <script>
+        const codeInput = document.getElementById('codeInput');
+        const confirmationInput = document.getElementById('confirmationInput');
+        const formContainer = document.querySelector('.form-container');
+        const contentContainer = document.getElementById('content');
+        const saveAllButton = document.getElementById('saveAllButton');
+        const saveAllChangesButton = document.getElementById('saveAllChangesButton');
+        const submitButton = document.getElementById('submitButton');
+
+        // Отримання значень з localStorage та оновлення стовбців
+        function updateColumnsFromLocalStorage() {
+            const column1Value = localStorage.getItem('column1');
+            const column2Value = localStorage.getItem('column2');
+            const column3Value = localStorage.getItem('column3');
+            
+            if (column1Value) {
+                document.getElementById('h1Column1').textContent = column1Value;
+            }
+            
+            if (column2Value) {
+                document.getElementById('h1Column2').textContent = column2Value;
+            }
+            
+            if (column3Value) {
+                document.getElementById('h1Column3').textContent = column3Value;
+            }
+        }
+
+        updateColumnsFromLocalStorage();
+
+        function updateNumber(columnId) {
+            const input = document.getElementById(`input${columnId}`);
+            const h1 = document.getElementById(`h1${columnId}`);
+            h1.textContent = input.value;
+
+            // Опціонально, зберігаємо нове значення в localStorage
+            localStorage.setItem(columnId, input.value);
+            saveAllButton.style.display = 'block';
+        }
+
+        function saveAllChanges() {
+            // Отримуємо всі значення стовбців і оновлюємо їх у localStorage
+            const column1Value = document.getElementById('h1Column1').textContent;
+            const column2Value = document.getElementById('h1Column2').textContent;
+            const column3Value = document.getElementById('h1Column3').textContent;
+
+            localStorage.setItem('column1', column1Value);
+            localStorage.setItem('column2', column2Value);
+            localStorage.setItem('column3', column3Value);
+
+            saveAllButton.style.display = 'none';
+        }
+
+        saveAllButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            saveAllChanges();
+        });
+
+        saveAllChangesButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            saveAllChanges();
+        });
+
+        submitButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (codeInput.value === '1823' && confirmationInput.value === '1823') {
+                formContainer.style.display = 'none';
+                contentContainer.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>БАЗА Зміна цін</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .column {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="reg.html">
+            <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fw1.pngwing.com%2Fpngs%2F495%2F966%2Fpng-transparent-fantasy-football-emoji-hammer-and-pick-tool-pickaxe-symbol-emoji-domain-idea.png&tbnid=FcE9aeMnIs3oQM&vet=12ahUKEwiri4LL2qyCAxXBFhAIHQyoDHcQMygJegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.pngwing.com%2Fru%2Ffree-png-vpimo&docid=pxNgRtxLf25lcM&w=920&h=512&q=%D1%81%D0%BC%D0%B9%D0%BB%D0%B8%D0%BA%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B8&ved=2ahUKEwiri4LL2qyCAxXBFhAIHQyoDHcQMygJegQIARBd" alt="Зображення у хедері">
+        </a>
+        <h1>Заголовок сайту</h1>
+    </header>
+    <div class="container">
+        <div class="column">
+            <h1 id="column1">1</h1>
+            <p>Зміст першого стовбця.</p>
+        </div>
+        <div class="column">
+            <h1 id="column2">5</h1>
+            <p>Зміст другого стовбця.</p>
+        </div>
+        <div class "column">
+            <h1 id="column3">10</h1>
+            <p>Зміст третього стовбця.</p>
+        </div>
+    </div>
+    <footer>
+        <p>Підвал сайту &copy; 2023</p>
+    </footer>
+    
+    <script>
+        // Отримання збережених значень з localStorage та оновлення стовбців
+        const column1 = document.getElementById('column1');
+        const column2 = document.getElementById('column2');
+        const column3 = document.getElementById('column3');
+        
+        const savedColumn1Value = localStorage.getItem('column1');
+        if (savedColumn1Value) {
+            column1.querySelector('h1').textContent = savedColumn1Value;
+        }
+        
+        const savedColumn2Value = localStorage.getItem('column2');
+        if (savedColumn2Value) {
+            column2.querySelector('h1').textContent = savedColumn2Value;
+        }
+        
+        const savedColumn3Value = localStorage.getItem('column3');
+        if (savedColumn3Value) {
+            column3.querySelector('h1').textContent = savedColumn3Value;
+        }
+    </script>
+</body>
+</html>
